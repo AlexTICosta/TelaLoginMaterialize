@@ -47,6 +47,7 @@ jobs:
     environment: 
       name: produção
       url: 'alexcosta.com'
+      
     needs: deploy-homolog         
     steps:
       # Runs a single command using the runners shell
