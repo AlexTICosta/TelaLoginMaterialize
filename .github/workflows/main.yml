@@ -1,0 +1,56 @@
+name: CI
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+
+jobs:  
+  build:    
+    runs-on: ubuntu-latest   
+    steps:
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
+        
+  deploy-dev:    
+    runs-on: ubuntu-latest
+    environment: 
+      name: dev
+      url: 'alexcosta.com'
+    needs: build         
+    steps:
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo deploy dev!
+        
+  deploy-homolog:    
+    runs-on: ubuntu-latest
+    environment: 
+      name: deploy-dev
+      url: 'alexcosta.com'
+    needs: build         
+    steps:
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo deploy homologação!
+        
+  deploy-production:    
+    runs-on: ubuntu-latest
+    environment: 
+      name: produção
+      url: 'alexcosta.com'
+    needs: deploy-homolog         
+    steps:
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo deploy homologação!
+
+      
